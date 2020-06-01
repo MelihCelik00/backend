@@ -1,0 +1,6 @@
+/Users/melihsafacelik/Projects/BackendCourse/BackendCourse/bin/Debug/BackendCourse.exe
+/Users/melihsafacelik/Projects/BackendCourse/BackendCourse/bin/Debug/BackendCourse.pdb
+/Users/melihsafacelik/Projects/BackendCourse/BackendCourse/obj/Debug/BackendCourse.csprojAssemblyReference.cache
+/Users/melihsafacelik/Projects/BackendCourse/BackendCourse/obj/Debug/BackendCourse.csproj.CoreCompileInputs.cache
+/Users/melihsafacelik/Projects/BackendCourse/BackendCourse/obj/Debug/BackendCourse.exe
+/Users/melihsafacelik/Projects/BackendCourse/BackendCourse/obj/Debug/BackendCourse.pdb
