@@ -1,4 +1,4 @@
-﻿using System;
+    using System;
 
 namespace BackendCourse
 {
@@ -6,6 +6,8 @@ namespace BackendCourse
     {
         public static void Main(string[] args)
         {
+            // User Login HW
+            /*
             bool nameCorrect = false;
             bool surnameCorrect = false;
             bool successfulEntry = false;
@@ -46,8 +48,26 @@ namespace BackendCourse
                 }
             }
             Console.WriteLine("Have fun at rest of the program!! Good day! ");
+            */
 
+            //Fibonacci HW ////////////
+            Console.WriteLine(Fibonacci.Fibo(9));
+        }
 
+    }
+
+    public class Fibonacci
+    {
+        public static int Fibo(int n)
+        {
+            if (n <= 1)
+            {
+                return n;
+            }
+            else
+            {
+                return Fibo(n - 1) + Fibo(n - 2);
+            }
         }
     }
 }
