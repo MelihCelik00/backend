@@ -1,0 +1,6 @@
+/Users/melihsafacelik/Projects/RegisterLogin/RegisterLogin/bin/Debug/RegisterLogin.exe
+/Users/melihsafacelik/Projects/RegisterLogin/RegisterLogin/bin/Debug/RegisterLogin.pdb
+/Users/melihsafacelik/Projects/RegisterLogin/RegisterLogin/obj/Debug/RegisterLogin.csprojAssemblyReference.cache
+/Users/melihsafacelik/Projects/RegisterLogin/RegisterLogin/obj/Debug/RegisterLogin.csproj.CoreCompileInputs.cache
+/Users/melihsafacelik/Projects/RegisterLogin/RegisterLogin/obj/Debug/RegisterLogin.exe
+/Users/melihsafacelik/Projects/RegisterLogin/RegisterLogin/obj/Debug/RegisterLogin.pdb
