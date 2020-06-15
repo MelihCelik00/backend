@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.SQLite;
 
 namespace TicketSystem
 {
@@ -8,9 +9,9 @@ namespace TicketSystem
         {
             /*
                 Temel işlemler şöyle user:
-                Login
-                Register
-                Show my tickets
+                Login +
+                Register +
+                Show my tickets+
                 Open ticket
                 Admin:
                 Login

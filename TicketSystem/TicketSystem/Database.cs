@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Data.SQLite;
-using System.Text;
+//using System.Text;
 using System.Data;
-
+using System.Collections.Generic;
 
 namespace TicketSystem
 {
@@ -10,28 +10,29 @@ namespace TicketSystem
     {
         //Methods for Admin and User
 
-        private string dbName = "ticketDB";
+        //private string name = "ticketDB";
         private string query;
         private string query2;
-        public SQLiteConnection con = null;
+        //public SQLiteConnection con;
         private string checkTicket;
         private string checkTicket1;
         DataTable dt = new DataTable();
-        DataTable dtU = new DataTable();
+        //DataTable dtU = new DataTable();
 
 
-        StringBuilder listSB = new StringBuilder();
-        int lineNumber = 0;
+        //StringBuilder listSB = new StringBuilder();
+        //int lineNumber = 0;
+        //var con = new SQLiteConnection("Data Source= database.db; Version = 3;");
 
-        public void ConnectDB(string name)
+        //public void ConnectDB()
+        //{
+        //var con = new SQLiteConnection(@"Data Source=database.db;Version=3;");
+        //con.Open();
+        //}
+
+        public void CreateTable(SQLiteConnection con)
         {
-            con = new SQLiteConnection($"Data Source={name};Version=3;");
-            con.Open();
-        }
-
-        public void CreateTable()
-        {
-            ConnectDB(dbName);
+            //ConnectDB();
             using (con)
             {
                 using (SQLiteCommand cmd = new SQLiteCommand(con))
@@ -51,8 +52,10 @@ namespace TicketSystem
                     // TICKET BLOCK
                     cmd.CommandText = @"CREATE TABLE IF NOT EXISTS Tickets (
                     TicketID INTEGER PRIMARY KEY AUTOINCREMENT,
-                    Ticket VARCHAR,
-                    Answer VARCHAR,
+                    Ticket TEXT,
+                    Answer TEXT,
+                    askedUserId TEXT,
+                    adminAnswered TEXT,
                     CONSTRAINT fk_departments
                         FOREIGN KEY (UserID, UserName)
                         REFERENCES Users(UserID, UserName)
@@ -63,9 +66,9 @@ namespace TicketSystem
             }
         }
 
-        public void SetAdmin()
+        public void SetAdmin(SQLiteConnection con)
         {
-            ConnectDB(dbName);
+            //ConnectDB();
             using (con)
             {
                 using (SQLiteCommand cmd1 = new SQLiteCommand(con))
@@ -80,9 +83,9 @@ namespace TicketSystem
             }
         }
 
-        public void WriteOnTable(string _name, string _middle, string _surname, string _username, string _password, string _mail, string _bod)
+        public void WriteOnTable(string _name, string _middle, string _surname, string _username, string _password, string _mail, string _bod, SQLiteConnection con)
         {
-            ConnectDB(dbName);
+            //ConnectDB();
             using (con)
             {
                 using (SQLiteCommand cmd1 = new SQLiteCommand(con))
@@ -98,17 +101,35 @@ namespace TicketSystem
             //command1.ExecuteNonQuery();
         }
         // User ID kısmına bak!
-        public void CheckTicket(string un, string pwd)
+
+        public void CheckTicket(string un, string pwd, SQLiteConnection con) // User's Method!
         {
-            ConnectDB("ticketDB");
+            //ConnectDB();
             using (con)
             {
                 using (SQLiteCommand command = new SQLiteCommand(con))
                 {
                     command.Parameters.AddWithValue("@un", un);
-                    checkTicket = @"SELECT Ticket FROM Tickets WHERE Ticket.UserID=Users.UserID";
+                    command.Parameters.AddWithValue("@pwd", pwd);
+                    checkTicket = @"SELECT * FROM Users WHERE userName = @un AND Password = @pwd";
+                    //7/7/7/7/7/7//
+                    var reader = command.ExecuteScalar();
+                    var userid = reader.ToString();
+                    command.Parameters.AddWithValue("@userid",userid);
+
+                    command.CommandText = @"SELECT * FROM Tickets WHERE Tickets.userName = @userid";
+
+                    var rdr = command.ExecuteReader();
+
+                    while (rdr.Read())
+                    {
+                        Console.WriteLine($"{rdr.GetString(1)} {rdr.GetString(2)} \n");
+                    }
+
                     //command.CommandText = checkTicket;
                     //command.ExecuteNonQuery();
+
+                    /*
                     SQLiteDataAdapter adapter = new SQLiteDataAdapter(checkTicket,con);
                     adapter.Fill(dtU);
                     con.Close();
@@ -117,13 +138,14 @@ namespace TicketSystem
                         string row2 = String.Format($"Ticket: {item2[1]} Answer: {item2[2]} UserID: {item2[3]}");
                         Console.WriteLine(row2);
                     }
+                    */
                 }
             }
         }
 
-        public void CheckAllTicket()
+        public void CheckAllTicket(SQLiteConnection con) // Admin's Method!
         {
-            ConnectDB("ticketDB");
+            //ConnectDB();
             using (con)
             {
                 using (SQLiteCommand command1 = new SQLiteCommand(con))
@@ -140,7 +162,6 @@ namespace TicketSystem
                         string row = String.Format($"Ticket: {item[1]} Answer: {item[2]} UserID: {item[3]}");
                         Console.WriteLine(row);
                     }
-
                 }
             }
         }
